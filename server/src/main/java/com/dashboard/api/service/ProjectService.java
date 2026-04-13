@@ -1,3 +1,7 @@
+/**
+ * ProjectService
+ * Business logic layer mapping repository data to the API controllers, handling custom validation and initialization.
+ */
 package com.dashboard.api.service;
 
 import com.dashboard.api.model.Project;
@@ -31,6 +35,10 @@ public class ProjectService {
         this.objectMapper = objectMapper;
     }
 
+    /**
+     * Initialization hook that runs after bean creation. 
+     * Migrates legacy JSON data to the H2 database on the first run.
+     */
     @PostConstruct
     public void init() {
         if (projectRepository.count() == 0) {
@@ -61,14 +69,31 @@ public class ProjectService {
         }
     }
 
+    /**
+     * Fetches all projects from the database.
+     * @return List of all projects.
+     */
     public List<Project> getAllProjects() {
         return projectRepository.findAll();
     }
 
+    /**
+     * Fetches a single project by ID.
+     * @param id The project ID.
+     * @return The project entity.
+     * @throws ResponseStatusException if not found.
+     */
     public Project getProject(Long id) {
         return findProjectOrThrow(id);
     }
 
+    /**
+     * Updates an existing project dynamically based on non-null fields in the updates payload.
+     * @param id The project ID.
+     * @param updates Project payload with fields to update.
+     * @return The updated project entity.
+     * @throws ResponseStatusException if not found.
+     */
     public Project updateProject(Long id, Project updates) {
         Project project = findProjectOrThrow(id);
 
@@ -82,6 +107,13 @@ public class ProjectService {
         return projectRepository.save(project);
     }
 
+    /**
+     * Creates a new task and associates it with the matching project.
+     * @param projectId The parent project ID.
+     * @param newTask Task payload to create.
+     * @return The saved Task entity.
+     * @throws ResponseStatusException if the parent project is not found.
+     */
     public Task createTask(Long projectId, Task newTask) {
         Project project = findProjectOrThrow(projectId);
 
@@ -100,6 +132,14 @@ public class ProjectService {
         return project.tasks.get(project.tasks.size() - 1);
     }
 
+    /**
+     * Updates an existing task's fields dynamically.
+     * @param projectId The parent project ID.
+     * @param taskId The task ID to update.
+     * @param updates Task payload with fields to update.
+     * @return The updated and saved Task entity.
+     * @throws ResponseStatusException if the project or task is not found.
+     */
     public Task updateTask(Long projectId, Long taskId, Task updates) {
         findProjectOrThrow(projectId); // verify project holds this task
 
@@ -112,6 +152,12 @@ public class ProjectService {
         return taskRepository.save(task);
     }
 
+    /**
+     * Deletes a task from the database after verifying the parent project structure.
+     * @param projectId The parent project ID.
+     * @param taskId The task ID to delete.
+     * @throws ResponseStatusException if the project or task is not found.
+     */
     public void deleteTask(Long projectId, Long taskId) {
         Project project = findProjectOrThrow(projectId);
         
@@ -124,6 +170,12 @@ public class ProjectService {
         projectRepository.save(project);
     }
 
+    /**
+     * Helper method to lookup a project or throw a 404 NOT_FOUND exception.
+     * @param id The project ID.
+     * @return The resolved Project.
+     * @throws ResponseStatusException if the project doesn't exist.
+     */
     private Project findProjectOrThrow(Long id) {
         return projectRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Project not found"));

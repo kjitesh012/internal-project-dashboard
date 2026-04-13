@@ -1,3 +1,7 @@
+/**
+ * Project Entity
+ * JPA Model representing a Project containing multiple tasks.
+ */
 package com.dashboard.api.model;
 
 import jakarta.persistence.*;

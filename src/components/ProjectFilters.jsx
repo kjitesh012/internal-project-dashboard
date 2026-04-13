@@ -1,3 +1,7 @@
+/**
+ * ProjectFilters Component
+ * Provides search and filtering controls for the project list.
+ */
 import React from 'react';
 import { statusOptions } from './statusConfig';
 import ProjectList from './ProjectList';

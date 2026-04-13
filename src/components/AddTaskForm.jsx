@@ -1,3 +1,7 @@
+/**
+ * AddTaskForm Component
+ * Provides a UI form to add a new task to a specific project.
+ */
 import React, { useState } from 'react';
 
 const API_URL = 'http://localhost:8080/api';
@@ -10,6 +14,10 @@ function AddTaskForm({ projectId, onTaskAdded, onCancel, existingTasks = [] }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  /**
+   * Synchronizes the controlled input states with component state.
+   * @param {React.ChangeEvent} e - The triggered change event.
+   */
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -18,6 +26,10 @@ function AddTaskForm({ projectId, onTaskAdded, onCancel, existingTasks = [] }) {
     }));
   };
 
+  /**
+   * Triggers the backend API to save the new task and updates the parent state.
+   * @param {React.FormEvent} e - Form submission event.
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);

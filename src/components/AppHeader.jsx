@@ -1,3 +1,7 @@
+/**
+ * AppHeader Component
+ * Renders the main application header and branding.
+ */
 import React from 'react';
 
 function AppHeader() {

@@ -1,3 +1,7 @@
+/**
+ * EditProjectModal Component
+ * Displays a modal dialog allowing users to modify existing project details.
+ */
 import React, { useState } from 'react';
 
 const API_URL = 'http://localhost:8080/api';
@@ -14,6 +18,11 @@ function EditProjectModal({ project, onClose, onSave }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  /**
+   * Translates form inputs into the controlled state variable.
+   * Special conversion for progress field to integer.
+   * @param {React.ChangeEvent} e - Input change event.
+   */
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -22,6 +31,10 @@ function EditProjectModal({ project, onClose, onSave }) {
     }));
   };
 
+  /**
+   * Dispatches the local state payload to the update API.
+   * @param {React.FormEvent} e - Form submission event.
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);

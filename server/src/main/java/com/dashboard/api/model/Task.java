@@ -1,3 +1,7 @@
+/**
+ * Task Entity
+ * JPA Model representing an individual task within a parent Project.
+ */
 package com.dashboard.api.model;
 
 import jakarta.persistence.*;

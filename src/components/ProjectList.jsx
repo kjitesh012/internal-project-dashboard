@@ -1,3 +1,7 @@
+/**
+ * ProjectList Component
+ * Container component that orchestrates the display of all active projects in a mapped grid.
+ */
 import React from 'react';
 import ProjectCard from './ProjectCard';
 

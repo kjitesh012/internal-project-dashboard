@@ -1,3 +1,7 @@
+/**
+ * main entry point
+ * Bootstraps the React application and mounts it to the DOM.
+ */
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.jsx';

@@ -1,3 +1,7 @@
+/**
+ * ProjectDetails Component
+ * Displays the comprehensive view of a project, including its tasks and manager info.
+ */
 import React, { useState, useEffect } from 'react';
 import { statusBadge } from './statusConfig';
 import ProgressBar from './ProgressBar';
@@ -17,6 +21,10 @@ function ProjectDetails({ project, onProjectUpdated }) {
     setShowAddTaskForm(false);
   }, [project]);
 
+  /**
+   * Pushes the locally updated project structure upward to the App shell.
+   * @param {Object} updatedProject - The modified project context.
+   */
   const handleProjectSave = (updatedProject) => {
     setProjectData(updatedProject);
     if (onProjectUpdated) {
@@ -24,6 +32,10 @@ function ProjectDetails({ project, onProjectUpdated }) {
     }
   };
 
+  /**
+   * Appends a newly created task to the local component state.
+   * @param {Object} newTask - The task returned from the API.
+   */
   const handleTaskAdded = (newTask) => {
     setProjectData(prev => ({
       ...prev,
@@ -32,6 +44,10 @@ function ProjectDetails({ project, onProjectUpdated }) {
     setShowAddTaskForm(false);
   };
 
+  /**
+   * Removes a task from tracking bounds upon deletion via the TaskList component.
+   * @param {number} taskId - The ID of the task that was deleted.
+   */
   const handleTaskDeleted = (taskId) => {
     setProjectData(prev => ({
       ...prev,
@@ -39,6 +55,10 @@ function ProjectDetails({ project, onProjectUpdated }) {
     }));
   };
 
+  /**
+   * Updates an internal task in place when its status or details change.
+   * @param {Object} updatedTask - The exact task response from the mutation action.
+   */
   const handleTaskUpdated = (updatedTask) => {
     setProjectData(prev => ({
       ...prev,

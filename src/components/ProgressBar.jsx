@@ -1,3 +1,7 @@
+/**
+ * ProgressBar Component
+ * Visually represents the completion percentage of a project.
+ */
 import React from 'react';
 
 function ProgressBar({ value }) {

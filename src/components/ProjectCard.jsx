@@ -1,3 +1,7 @@
+/**
+ * ProjectCard Component
+ * Renders a summary card for a single project including its status and progress.
+ */
 import React from 'react';
 import { statusBadge } from './statusConfig';
 

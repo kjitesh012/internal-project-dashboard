@@ -1,3 +1,7 @@
+/**
+ * TaskList Component
+ * Renders the list of tasks inside a project and provides status update capabilities.
+ */
 import React, { useState } from 'react';
 
 const API_URL = 'http://localhost:8080/api';
@@ -7,6 +11,10 @@ function TaskList({ tasks, projectId, onTaskDeleted, onTaskUpdated }) {
   const [updatingId, setUpdatingId] = useState(null);
   const [newStatus, setNewStatus] = useState({});
 
+  /**
+   * Dispatches the delete command to the API and fires the parent UI update.
+   * @param {number} taskId - ID of the target task.
+   */
   const handleDeleteTask = async (taskId) => {
     if (!confirm('Are you sure you want to delete this task?')) return;
 
@@ -27,6 +35,13 @@ function TaskList({ tasks, projectId, onTaskDeleted, onTaskUpdated }) {
     }
   };
 
+  /**
+   * Sends the isolated task status change to the backend service.
+   * Leverages a closure timeout locally to bypass strict state delays on the component loop.
+   * @param {number} taskId - Target task ID.
+   * @param {string} currentStatus - Existing status text.
+   * @param {string} [overrideStatus] - An immediate string intercept replacement.
+   */
   const handleStatusChange = async (taskId, currentStatus, overrideStatus) => {
     const status = overrideStatus || newStatus[taskId];
     if (!status || status === currentStatus) return;

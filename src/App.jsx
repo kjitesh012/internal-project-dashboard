@@ -1,3 +1,7 @@
+/**
+ * App Component
+ * Root component of the React application setting up layout and state management.
+ */
 import { useEffect, useMemo, useState } from 'react';
 import { projects as mockProjects } from './data.js';
 import AppHeader from './components/AppHeader';
@@ -36,6 +40,11 @@ function App() {
     loadProjects();
   }, []);
 
+  /**
+   * Pure computational hook that filters the projects array safely without modifying core state.
+   * Applies both search term matching and categorical status matching uniformly.
+   * @returns {Array} The subset list of projects visible to the user.
+   */
   const filtered = useMemo(() => {
     return projects.filter((project) => {
       const matchesStatus = statusFilter === 'All' || project.status === statusFilter;
@@ -50,6 +59,10 @@ function App() {
 
   const selectedProject = projects.find((project) => project.id === selectedId) || filtered[0] || null;
 
+  /**
+   * Call-back tunnel ensuring deeply nested component mutations safely overwrite the local unified Dashboard state.
+   * @param {Object} updatedProject - The synced project context after saves or task modifications.
+   */
   const handleProjectUpdated = (updatedProject) => {
     setProjects(prev => 
       prev.map(p => p.id === updatedProject.id ? updatedProject : p)

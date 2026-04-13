@@ -1,3 +1,7 @@
+/**
+ * TaskRepository
+ * Spring Data JPA Repository for database operations on Task entities.
+ */
 package com.dashboard.api.repository;
 
 import com.dashboard.api.model.Task;

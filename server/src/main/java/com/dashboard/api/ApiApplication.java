@@ -1,3 +1,7 @@
+/**
+ * ApiApplication
+ * Main Spring Boot application class bootstrapping the backend server.
+ */
 package com.dashboard.api;
 
 import org.springframework.boot.SpringApplication;
