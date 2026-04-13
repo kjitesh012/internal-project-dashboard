@@ -1,0 +1,7 @@
+com\dashboard\api\ApiApplication.class
+com\dashboard\api\service\ProjectFileStore.class
+com\dashboard\api\ApiApplication$CorsConfig.class
+com\dashboard\api\model\Task.class
+com\dashboard\api\service\ProjectService.class
+com\dashboard\api\controller\ProjectController.class
+com\dashboard\api\model\Project.class
