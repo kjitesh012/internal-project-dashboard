@@ -1,0 +1,44 @@
+export const projects = [
+  {
+    id: 1,
+    name: 'Edwar Jones',
+    manager: 'Ranjat Srivastava',
+    status: 'In Progress',
+    deadline: '2026-06-15',
+    description: 'Migrating the legacy HR platform to a new cloud-native architecture.',
+    progress: 65,
+    tasks: [
+      { id: 1, title: 'Requirement review', status: 'Done' },
+      { id: 2, title: 'Architecture design', status: 'In Progress' },
+      { id: 3, title: 'Cloud deployment', status: 'Pending' }
+    ]
+  },
+  {
+    id: 2,
+    name: 'Q2 Marketing Campaign Analytics',
+    manager: 'Priya Sharma',
+    status: 'Completed',
+    deadline: '2026-04-30',
+    description: 'Analyze the performance of all digital marketing campaigns from the second quarter.',
+    progress: 100,
+    tasks: [
+      { id: 4, title: 'Data collection', status: 'Done' },
+      { id: 5, title: 'Report generation', status: 'Done' },
+      { id: 6, title: 'Stakeholder review', status: 'Done' }
+    ]
+  },
+  {
+    id: 3,
+    name: 'Customer Support AI Chatbot',
+    manager: 'Sushant Mishra',
+    status: 'On Hold',
+    deadline: '2026-09-01',
+    description: 'Develop a new AI-powered chatbot to handle initial customer support queries.',
+    progress: 30,
+    tasks: [
+      { id: 7, title: 'Model evaluation', status: 'In Progress' },
+      { id: 8, title: 'UI prototype', status: 'Pending' },
+      { id: 9, title: 'Integration plan', status: 'Pending' }
+    ]
+  }
+];
