@@ -27,8 +27,8 @@ function TaskList({ tasks, projectId, onTaskDeleted, onTaskUpdated }) {
     }
   };
 
-  const handleStatusChange = async (taskId, currentStatus) => {
-    const status = newStatus[taskId];
+  const handleStatusChange = async (taskId, currentStatus, overrideStatus) => {
+    const status = overrideStatus || newStatus[taskId];
     if (!status || status === currentStatus) return;
 
     setUpdatingId(taskId);
@@ -64,8 +64,9 @@ function TaskList({ tasks, projectId, onTaskDeleted, onTaskUpdated }) {
             <select
               value={newStatus[task.id] !== undefined ? newStatus[task.id] : task.status}
               onChange={(e) => {
-                setNewStatus(prev => ({ ...prev, [task.id]: e.target.value }));
-                setTimeout(() => handleStatusChange(task.id, task.status), 0);
+                const val = e.target.value;
+                setNewStatus(prev => ({ ...prev, [task.id]: val }));
+                setTimeout(() => handleStatusChange(task.id, task.status, val), 0);
               }}
               disabled={updatingId === task.id}
               className="task-status-select"

@@ -1,7 +1,14 @@
 package com.dashboard.api.model;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "tasks")
 public class Task {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
+    
     public String title;
     public String status;
 

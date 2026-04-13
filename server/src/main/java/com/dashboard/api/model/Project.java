@@ -1,16 +1,26 @@
 package com.dashboard.api.model;
 
+import jakarta.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name = "projects")
 public class Project {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
+    
     public String name;
     public String manager;
     public String status;
     public String deadline;
     public String description;
     public Integer progress;
-    public List<Task> tasks;
+    
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "project_id")
+    public List<Task> tasks = new ArrayList<>();
 
     public Project() {}
 
@@ -23,6 +33,8 @@ public class Project {
         this.deadline = deadline;
         this.description = description;
         this.progress = progress;
-        this.tasks = tasks;
+        if (tasks != null) {
+            this.tasks = tasks;
+        }
     }
 }
